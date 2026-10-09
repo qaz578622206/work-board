@@ -48,9 +48,30 @@
   .foot{color:var(--sub);font-size:12px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
   footer{padding:0 28px 40px;color:var(--sub);font-size:12.5px}
   @media(max-width:560px){main{padding:16px 14px 30px}header{padding:18px 14px 14px}}
-</style>
+  #lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#eef1f6,#e2e8f1);
+    display:flex;align-items:center;justify-content:center;padding:20px}
+  #lock .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px;
+    width:100%;max-width:340px;text-align:center;box-shadow:0 12px 40px rgba(20,30,50,.10)}
+  #lock h2{margin:0 0 6px;font-size:19px;font-weight:600}
+  #lock p{margin:0 0 18px;color:var(--sub);font-size:13px}
+  #lock input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
+    font-size:15px;text-align:center;letter-spacing:2px;outline:none}
+  #lock input:focus{border-color:#9aa6b8}
+  #lock button{margin-top:12px;width:100%;padding:11px;border:0;border-radius:9px;
+    background:var(--text);color:#fff;font-size:15px;cursor:pointer}
+  #lock button:hover{opacity:.9}
+  #lock .err{color:var(--red);font-size:13px;min-height:18px;margin-top:8px}</style>
 </head>
 <body>
+<div id="lock">
+  <div class="box">
+    <h2>金融工作 · 进度看板</h2>
+    <p>请输入口令</p>
+    <input id="lockpw" type="password" placeholder="口令" autocomplete="off">
+    <button id="lockbtn">进入</button>
+    <div class="err" id="lockerr"></div>
+  </div>
+</div>
 <header>
   <h1>金融工作 · 进度看板</h1>
   <div class="meta">数据来源：本地记忆库 <code>projects/active</code>　·　整理：念安　·　更新日期 2026-10-09</div>
@@ -223,6 +244,19 @@ function renderBoard(){
     </div>`).join('');
 }
 renderStats(); renderFilters(); renderBoard();
+/* ---- 口令锁（前端保护，用于挡住随手点开的人） ---- */
+const HASH = 'c2860769';
+function h(s){ let x = 5381; for (let i = 0; i < s.length; i++) { x = ((x << 5) + x + s.charCodeAt(i)) >>> 0; } return x.toString(16); }
+const lockEl = document.getElementById('lock');
+function unlock(){ if (lockEl) lockEl.style.display = 'none'; }
+if (sessionStorage.getItem('wb_ok') === HASH) { unlock(); }
+const pwEl = document.getElementById('lockpw');
+const btnEl = document.getElementById('lockbtn');
+if (btnEl) btnEl.onclick = () => {
+  if (h(pwEl.value) === HASH) { sessionStorage.setItem('wb_ok', HASH); unlock(); }
+  else { document.getElementById('lockerr').textContent = '口令不对'; }
+};
+if (pwEl) pwEl.addEventListener('keydown', e => { if (e.key === 'Enter' && btnEl) btnEl.click(); });
 </script>
 </body>
 </html>
