@@ -11,6 +11,7 @@
     --yellow:#b45309; --yellowbg:#fdf3e3;
     --blue:#2563eb; --bluebg:#e9f0fe;
     --red:#dc2626; --redbg:#fdeaea;
+    --gray:#64748b; --graybg:#eef1f5;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);
@@ -26,6 +27,10 @@
     padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13.5px}
   .filters button:hover{border-color:#c9ced8}
   .filters button.on{background:var(--text);color:#fff;border-color:var(--text)}
+  .tabs{display:flex;gap:2px;margin:16px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tabs button{border:0;background:none;padding:9px 16px;font-size:14.5px;cursor:pointer;
+    color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit}
+  .tabs button.on{color:var(--text);font-weight:600;border-bottom-color:var(--text)}
   main{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));
     gap:16px;padding:20px 28px 40px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
@@ -38,6 +43,7 @@
   .b-yellow{color:var(--yellow);background:var(--yellowbg)}
   .b-blue{color:var(--blue);background:var(--bluebg)}
   .b-red{color:var(--red);background:var(--redbg)}
+  .b-gray{color:var(--gray);background:var(--graybg)}
   .summary{font-size:14px}
   .amt{font-size:13px;color:var(--sub)}
   .amt b{color:var(--text);font-size:14.5px}
@@ -47,7 +53,51 @@
   .next{background:#f8f9fb;border-left:3px solid #cbd5e1;padding:8px 10px;border-radius:6px;font-size:13.5px}
   .foot{color:var(--sub);font-size:12px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
   footer{padding:0 28px 40px;color:var(--sub);font-size:12.5px}
-  @media(max-width:560px){main{padding:16px 14px 30px}header{padding:18px 14px 14px}}
+  /* ---- 审批进度 ---- */
+  .steps{display:flex;gap:3px}
+  .steps i{flex:1;height:6px;border-radius:3px;background:#e9ecf1}
+  .steps i.done{background:var(--green)}
+  .steps i.now{background:var(--blue)}
+  .steps i.dead{background:#f0b4b4}
+  .legend{display:flex;gap:3px;font-size:10px;color:var(--sub);text-align:center}
+  .legend span{flex:1;overflow:hidden;white-space:nowrap}
+  .legend span.now{color:var(--blue);font-weight:700}
+  .conds details{border-top:1px dashed var(--line);padding-top:7px}
+  .conds summary{cursor:pointer;font-size:12.8px;color:var(--sub);font-weight:600;outline:none}
+  .conds ul{margin:6px 0 0;padding-left:17px}
+  .conds li{font-size:12.8px;color:#374151}
+  .byline{font-size:12px;color:var(--sub)}
+  @media(max-width:560px){
+    main{padding:16px 14px 30px;grid-template-columns:1fr}
+    header{padding:18px 14px 14px}
+    .stats{gap:20px}
+    .legend{font-size:9px}
+  }
+  /* ---- 记一笔 / 收件箱 ---- */
+  .acts{display:flex;justify-content:flex-end;margin-top:2px}
+  .act{border:1px dashed #cbd5e1;background:#fff;color:var(--sub);font-size:12.5px;
+    padding:4px 12px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .act:hover{border-color:var(--blue);color:var(--blue)}
+  .note-box{margin-top:2px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fbfcfe}
+  .note-box textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:8px;
+    padding:8px 10px;font:13.5px/1.6 inherit;outline:none;resize:vertical;color:var(--text)}
+  .note-box textarea:focus{border-color:#9aa6b8}
+  .note-acts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center}
+  .note-acts button{border:0;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+  .nb-primary{background:var(--text);color:#fff}
+  .nb-primary:hover{opacity:.9}
+  .nb-ghost{background:#eef1f5;color:var(--text)}
+  .nb-ghost:hover{background:#e4e8ef}
+  .note-tip{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.6}
+  .flash{background:var(--greenbg);color:var(--green);border-radius:8px;padding:5px 10px;font-size:12.5px;margin-top:8px}
+  .nb-slot:empty{display:none}
+  #inboxWrap{padding:20px 28px 40px;max-width:900px}
+  .inbox-item{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;margin-bottom:10px}
+  .inbox-item .t{font-size:14.5px;font-weight:600}
+  .inbox-item .b{font-size:13.5px;white-space:pre-wrap;margin-top:5px;color:#374151}
+  .inbox-item .m{font-size:11.5px;color:var(--sub);margin-top:7px}
+  .inbox-empty{color:var(--sub);font-size:13.5px;line-height:1.9}
+  @media(max-width:560px){#inboxWrap{padding:16px 14px 30px}}
   #lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#eef1f6,#e2e8f1);
     display:flex;align-items:center;justify-content:center;padding:20px}
   #lock .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px;
@@ -74,16 +124,29 @@
 </div>
 <header>
   <h1>金融工作 · 进度看板</h1>
-  <div class="meta">数据来源：本地记忆库 <code>projects/active</code>　·　整理：念安　·　更新日期 2026-10-09</div>
-  <div class="stats" id="stats"></div>
-  <div class="filters" id="filters"></div>
+  <div class="meta" id="meta"></div>
+  <nav class="tabs" id="tabs">
+    <button data-v="work">在办事项</button>
+    <button data-v="approval">风控审批进度</button>
+    <button data-v="inbox">记一笔 · 收件箱</button>
+  </nav>
+  <div id="pane-work">
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div id="pane-approval" style="display:none">
+    <div class="stats" id="astats"></div>
+    <div class="filters" id="afilters"></div>
+  </div>
+  <div id="pane-inbox" style="display:none">
+    <div class="meta" style="margin-top:12px" id="inboxStat"></div>
+  </div>
 </header>
 <main id="board"></main>
-<footer>
-  说明：本页为静态文件，双击即可打开，不联网、不上传。内容随记忆库更新后由念安重新生成。<br>
-  文件位置：D:\DSH\金融工作-进度看板.html
-</footer>
+<div id="inboxWrap" style="display:none"><div id="inboxList"></div></div>
+<footer>本页仅供个人工作跟进使用，内容随时更新。</footer>
 <script>
+/* ===== 在办事项 ===== */
 const ITEMS = [
   {
     name: "嘉和（2026 年审）",
@@ -187,9 +250,189 @@ const ITEMS = [
   }
 ];
 
+/* ===== 风控审批进度（由抓取结果自动生成） ===== */
+const DEALS = [
+  {
+    client: 'Bestsun',
+    subject: 'Bestsun Business Limited',
+    stage: 'Facilities activated',
+    stageLabel: '额度生效',
+    tone: 'green', step: 7, group: 'done', dead: false,
+    amount: 'US$10,000,000', reqLimit: 'US$10,000,000', reqRate: '', rating: 'B',
+    analyst: 'Tseng Charlie', owner: 'Roc zhang', qyd: '--',
+    latest: 'Chung Ross · 2024年7月31日 · @Charlie Tseng Please see below two entities for 分身 for 朋樂 Jeocu HK Trade Limited https://app.hubspot.com/contacts/3907577/record/0-2/21623030788 HK Hotcol Trade Limited https://app.hubspot.com/contacts/3907577/rec',
+    conditions: ['Corporate guarantee to be executed by 杭州环彩电子商务有限公司', 'Cross guarantee to be executed between Pleapy Hongkong Co., Limited and Bestsun Business Limited', 'Personal guarantee to be executed by 李雪飛, 沈欣瑞 and 华黎佳', 'Consent for credit checking to be signed by 杭州环彩电子商务有限公司, 李雪飛, 沈欣瑞 and 华黎佳 (subject to no adverse finding)', 'Debt acknowledgement by 李雪飛, 沈欣瑞 and 华黎佳', 'eKYC on Tmall and TFX to confirm the bank account has been changed to AirWallex', 'EKYC on office', 'Fund flow enhancement to be executed by AirWallex', 'Inventory enhancement to be executed by 錦城 and ANE'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/18085754552'
+  },
+  {
+    client: '朋乐香港（已放款）',
+    subject: 'Pleapy Hongkong Co., Limited 朋樂香港有限公司',
+    stage: 'Facilities activated',
+    stageLabel: '额度生效',
+    tone: 'green', step: 7, group: 'done', dead: false,
+    amount: 'US$10,000,000', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: 'Tseng Charlie', owner: 'Roc zhang', qyd: '--',
+    latest: 'Roc zhang · 2026年9月7日 · @Keith Tsang 王立个人征信报告 租房合同已同步',
+    conditions: ['Corporate guarantee to be executed by 杭州环彩电子商务有限公司', 'Cross guarantee to be executed between Pleapy Hongkong Co., Limited and Bestsun Business Limited', 'Personal guarantee to be executed by 李雪飛, 沈欣瑞 and 华黎佳', 'Consent for credit checking to be signed by 杭州环彩电子商务有限公司, 李雪飛, 沈欣瑞 and 华黎佳 (subject to no adverse finding)', 'Debt acknowledgement by 李雪飛, 沈欣瑞 and 华黎佳', 'eKYC on Tmall and TFX to confirm the bank account has been changed to AirWallex', 'EKYC on office', 'Fund flow enhancement to be executed by AirWallex', 'Inventory enhancement to be executed by 錦城 and ANE'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/17538994432'
+  },
+  {
+    client: 'BestMem（飞达集团）',
+    subject: 'BestMem Technology Limited',
+    stage: 'Credit Decision made pending for offer acceptance',
+    stageLabel: '待客户接受',
+    tone: 'blue', step: 5, group: 'live', dead: false,
+    amount: 'US$5,000,000', reqLimit: 'US$5,000,000', reqRate: '', rating: '--',
+    analyst: 'Mak Jason', owner: 'Roc zhang', qyd: 'SA106755',
+    latest: 'Roc zhang · 2026年8月27日 · @Yin Huang @Vivien Yeung 飞达新香港公司主体，飞书已发起合同申请，SA编码SA106755',
+    conditions: ['Corporate guarantee by飞达乐享（深圳）科技开发有限公司 and Prosper Wave Limited.', 'Personal guarantee by 彭漢超.', 'Allowed SKU for inventory pledge in Qupital is subject to recommendation of industry expert, seller is required to submit full SKU code to Qupital prior to facility drawdown for industry expert valuation.', 'Additional HK borrowing entity to be provided due to concentration (credit limit >USD5m).', 'Synnex must deliver the goods directly to the designated warehouse;', 'Synnex must copy Qupital "feda.notification@qupital.com" directly on all key transaction emails', 'The designated warehouse (i.e. SF express warehouse) must directly confirm receipt, stock counting and the freezing of the inventory.', 'Cross CG between Cross CG between FEDA ELECTRONICS COMPANY LIMITED and BestMem Technology Limited.'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344318342880'
+  },
+  {
+    client: '朋乐香港（Pleapy）',
+    subject: 'Pleapy Hongkong Co., Limited',
+    stage: 'Standardized working procedure under CA review',
+    stageLabel: '风控审批中',
+    tone: 'blue', step: 4, group: 'live', dead: false,
+    amount: 'US$5,000,000', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
+    latest: 'Tang Zen · 2026年9月28日 · @Keith Tsang @zhang Roc @Vivien Yeung @chan pui ki peggy @Sherry Yang @tu betty @Ashley Lai @Alvin Tse @Kasey Cheung @Kat Kwok full set docusign done, doc checked and uploaded',
+    conditions: ['Personal Guarantee to be executed by李雪飞, 华黎佳 and 王立', 'Corporate Guarantee to be executed by杭州环彩电子商务有限公司', 'Debt acknowledgement to be provided by 李雪飞, 华黎佳 and 王立', 'Credit checking to be conducted on 李雪飞, 华黎佳 and 王立', 'Updated PBOC report from 杭州环彩电子商务有限公司 to be provided', 'Inventory control to be executed by Jincheng, ANE and Cainiao'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/340265798345'
+  },
+  {
+    client: '万豪智联（Zhi King 集团）',
+    subject: 'Wanhao Smart IOT Co., Limited (萬豪智聯有限公司)',
+    stage: 'Awaiting Client Confirmation',
+    stageLabel: '待客户确认',
+    tone: 'yellow', step: 3, group: 'open', dead: false,
+    amount: 'US$10,000,000', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
+    latest: 'Roc zhang · 2026年1月28日 · @Keith Tsang @Ross Chung @Vivien Yeung SA：106574 客户zhiking另外一家香港公司资料，董事法人和zhiking HK完同一人，和zhiking共同承担1000万美金的额度。 合同准备文件已进行两家香港公司一家大陆公司相互担保相关资料填写和提交。',
+    conditions: ['Personal Guarantee to be executed by 李罡 and 鍾格雲', 'Corporate Guarantee to be executed by深圳市万豪智联技术有限公司', 'Debt acknowledgement to be provided by 李罡 and 鍾格雲', 'Credit checking to be conducted on李罡 and 鍾格雲', 'Loan drawdown shall be directly paid to suppliers instead of Seller', 'Inventory control to be executed by SHEN MING GLOBAL CO LIMITED', 'Cross Guarantee to be executed by all Sellers >1 year transaction sample documents from mentioned suppliers to be provided before drawdown', 'Only direct purchase from SK Hynix is in whitelist at this moment'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/276106757856'
+  },
+  {
+    client: '志成伟业科技',
+    subject: '志成偉業科技有限公司',
+    stage: 'Prospect',
+    stageLabel: '意向',
+    tone: 'gray', step: 2, group: 'open', dead: false,
+    amount: '', reqLimit: 'US$10,000,000', reqRate: '13', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106767',
+    latest: 'Tseng Charlie · 2026年9月4日 · @zhang Roc @min zhang Hi Roc, 請提供授信調查報告 Regards, Charlie Tseng',
+    conditions: ['授信調查報告'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/345478902511'
+  },
+  {
+    client: '恒发参茸（Hang Fat Ginseng）',
+    subject: 'Hang Fat Ginseng Holdings Company Limited',
+    stage: 'Prospect',
+    stageLabel: '意向',
+    tone: 'gray', step: 2, group: 'open', dead: false,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106764',
+    latest: 'Tseng Charlie · 2026年9月4日 · @zhang Roc 請提供調查報告 Regards, Charlie Tseng',
+    conditions: ['調查報告'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344730712781'
+  },
+  {
+    client: '启源电子（HONG KONG EFFORT）',
+    subject: 'HONG KONG EFFORT ELECTRONIC TECHNOLOGY CO., LIMITED',
+    stage: 'Prospect',
+    stageLabel: '意向',
+    tone: 'gray', step: 2, group: 'open', dead: false,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
+    latest: 'Tseng Charlie · 2026年8月31日 · @zhang Roc 這客戶的上游是一些香港公司, 與現時我們放款的客戶不同, 不是由生產商或大型供應商供貨. 請先提供證明這些上游的實力 Regards, Charlie Tseng',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344366226130'
+  },
+  {
+    client: '力拓国际（LEECOM）',
+    subject: 'LEECOM INTERNATIONAL CO., LIMITED',
+    stage: 'Lead',
+    stageLabel: '线索',
+    tone: 'gray', step: 1, group: 'open', dead: false,
+    amount: '', reqLimit: 'US$10,000,000', reqRate: '13', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106774',
+    latest: 'Roc zhang · 2026年10月9日 · @Charlie Tseng @Yin Huang @min zhang @Vivien Yeung SASA106774，客户现有基础资料已备，其中涉及交易链资料中合同处，客户公司盖章上方从新名字不一致，客户咨询供应商模板合同修改没到位，正在处理中，完成后提供，麻烦先分配风控同事进行审批流程。 额度申请：1000万美金 文件上传好像超上限，到时如需要风控可单独找我同步资料',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/348941385430'
+  },
+  {
+    client: '泰坦铸造（TITANS）',
+    subject: 'TITANS CASTING INTERNATIONAL CO., LIMITED',
+    stage: 'Closed lost',
+    stageLabel: '已拒绝 / 流失',
+    tone: 'red', step: 0, group: 'dead', dead: true,
+    amount: 'US$5,000,000', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: 'Chan Sandy', owner: 'Roc zhang', qyd: '--',
+    latest: 'betty tu · 2026年9月7日 · @Sandy Chan @chan pui ki peggy @Sherry Yang @Vivien Yeung Hi Sandy， 请查收场地视频。',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/340489280191'
+  },
+  {
+    client: '深圳新鸣拓',
+    subject: '深圳新鸣拓',
+    stage: 'Spam',
+    stageLabel: '无效线索',
+    tone: 'gray', step: 0, group: 'dead', dead: true,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
+    latest: 'Yeung Vivien · 2026年4月20日 · 銷售說业务是在俄罗斯 暂时 搞不了',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/320623881947'
+  },
+  {
+    client: '新加坡互联',
+    subject: '新加坡互联',
+    stage: 'Spam',
+    stageLabel: '无效线索',
+    tone: 'gray', step: 0, group: 'dead', dead: true,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
+    latest: '',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/41703655567'
+  },
+  {
+    client: '香港嘉和',
+    subject: '香港嘉和',
+    stage: 'Spam',
+    stageLabel: '无效线索',
+    tone: 'gray', step: 0, group: 'dead', dead: true,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
+    latest: '',
+    conditions: [],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/36393367716'
+  },
+  {
+    client: 'LONGSTAR',
+    subject: 'LONGSTAR BUSINESS LIMITED',
+    stage: 'Closed lost',
+    stageLabel: '已拒绝 / 流失',
+    tone: 'red', step: 0, group: 'dead', dead: true,
+    amount: '', reqLimit: '--', reqRate: '', rating: '--',
+    analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
+    latest: 'Ho Vivian · 2026年3月20日 · Declined due to lack of sufficient supporting documents. 十二月 2025',
+    conditions: ['Declined due to lack of sufficient supporting documents.'],
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/30401730161'
+  }
+];
+const UPDATED = '2026-10-09';
+const FETCHED = '2026-10-09 13:09';
+
+const STAGES = ['线索','意向','待客户确认','风控审批中','信贷决策','合同准备','额度生效'];
+
 const BOARD = document.getElementById('board');
 const STATS = document.getElementById('stats');
 const FILTERS = document.getElementById('filters');
+const ASTATS = document.getElementById('astats');
+const AFILTERS = document.getElementById('afilters');
+const TABS = document.getElementById('tabs');
+
 const FILTER_DEFS = [
   {key:'all',    text:'全部'},
   {key:'yellow', text:'等客户补件'},
@@ -197,7 +440,17 @@ const FILTER_DEFS = [
   {key:'blue',   text:'进行中'},
   {key:'red',    text:'已结案'}
 ];
-let cur = 'all';
+const AFILTER_DEFS = [
+  {key:'all',    text:'全部'},
+  {key:'live',   text:'审批中'},
+  {key:'open',   text:'待客户 / 待确认'},
+  {key:'done',   text:'已生效'},
+  {key:'dead',   text:'已结束'}
+];
+
+let cur = 'all';       // 在办事项筛选
+let acur = 'all';      // 审批进度筛选
+let view = 'work';     // 当前视图
 
 function counts(){
   return {
@@ -207,6 +460,15 @@ function counts(){
     ongoing: ITEMS.filter(i=>i.status==='blue').length
   };
 }
+function acounts(){
+  return {
+    total: DEALS.length,
+    live: DEALS.filter(d=>d.group==='live').length,
+    open: DEALS.filter(d=>d.group==='open').length,
+    done: DEALS.filter(d=>d.group==='done').length,
+    dead: DEALS.filter(d=>d.group==='dead').length
+  };
+}
 function renderStats(){
   const c = counts();
   STATS.innerHTML = `
@@ -214,16 +476,44 @@ function renderStats(){
     <div class="stat"><b>${c.waiting}</b><span>等客户补件</span></div>
     <div class="stat"><b>${c.done}</b><span>可提交 / 已放款</span></div>
     <div class="stat"><b>${c.ongoing}</b><span>推进中</span></div>`;
+  const a = acounts();
+  ASTATS.innerHTML = `
+    <div class="stat"><b>${a.total}</b><span>申请笔数</span></div>
+    <div class="stat"><b>${a.live}</b><span>审批中</span></div>
+    <div class="stat"><b>${a.open}</b><span>待客户 / 待确认</span></div>
+    <div class="stat"><b>${a.done}</b><span>已生效</span></div>
+    <div class="stat"><b>${a.dead}</b><span>已结束</span></div>`;
 }
 function renderFilters(){
   FILTERS.innerHTML = FILTER_DEFS.map(f=>
     `<button data-k="${f.key}" class="${f.key===cur?'on':''}">${f.text}</button>`).join('');
   FILTERS.querySelectorAll('button').forEach(b=>b.onclick=()=>{cur=b.dataset.k;renderFilters();renderBoard();});
+  AFILTERS.innerHTML = AFILTER_DEFS.map(f=>
+    `<button data-k="${f.key}" class="${f.key===acur?'on':''}">${f.text}</button>`).join('');
+  AFILTERS.querySelectorAll('button').forEach(b=>b.onclick=()=>{acur=b.dataset.k;renderFilters();renderBoard();});
 }
-function renderBoard(){
-  const list = cur==='all' ? ITEMS : ITEMS.filter(i=>i.status===cur);
-  if(!list.length){ BOARD.innerHTML = '<p style="color:#6b7280">这一类暂无事项。</p>'; return; }
-  BOARD.innerHTML = list.map(i=>`
+function renderTabs(){
+  TABS.querySelectorAll('button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.v===view);
+    b.onclick = () => {
+      view = b.dataset.v;
+      renderTabs(); renderBoard();
+      if (view === 'inbox' && !inboxLoaded) { inboxLoaded = true; loadInbox(); }
+    };
+  });
+  document.getElementById('pane-work').style.display     = view==='work'     ? '' : 'none';
+  document.getElementById('pane-approval').style.display = view==='approval' ? '' : 'none';
+  document.getElementById('pane-inbox').style.display    = view==='inbox'    ? '' : 'none';
+  document.getElementById('inboxWrap').style.display     = view==='inbox'    ? '' : 'none';
+  BOARD.style.display = view==='inbox' ? 'none' : '';
+}
+
+function noteBtn(key, name){
+  return `<div class="acts"><button class="act" data-note="${key}" data-name="${String(name).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">✍ 记一笔</button></div>`;
+}
+
+function workCard(i, idx){
+  return `
     <div class="card">
       <div class="card-top">
         <div>
@@ -241,9 +531,189 @@ function renderBoard(){
         </div>` : ''}
       ${i.next && i.next!=='—' ? `<div class="next"><b>下一步：</b>${i.next}</div>` : ''}
       <div class="foot">最后更新：${i.updated}</div>
-    </div>`).join('');
+      ${noteBtn('w'+idx, i.name)}
+      <div class="nb-slot"></div>
+    </div>`;
 }
-renderStats(); renderFilters(); renderBoard();
+
+function dealCard(d, idx){
+  const step = d.step;                       // 1..7，已结束为 0
+  const bars = STAGES.map((_,k)=>{
+    const n = k+1;
+    if(d.dead) return `<i class="dead"></i>`;
+    if(n < step) return `<i class="done"></i>`;
+    if(n === step) return `<i class="now"></i>`;
+    return `<i></i>`;
+  }).join('');
+  const legend = STAGES.map((s,k)=>
+    `<span class="${!d.dead && k+1===step?'now':''}">${s}</span>`).join('');
+  return `
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="name">${d.client}</div>
+          <div class="subject">${d.subject || ''}</div>
+        </div>
+        <div class="badge b-${d.tone}">${d.stageLabel}</div>
+      </div>
+      <div class="amt">
+        ${d.amount ? `金额 <b>${d.amount}</b>` : '金额 待定'}
+        ${d.reqLimit && d.reqLimit!=='--' ? ` · 申请额度 ${d.reqLimit}` : ''}
+        ${d.reqRate ? ` · 申请利率 ${d.reqRate}` : ''}
+        ${d.rating && d.rating!=='--' ? ` · 客户评级 <b>${d.rating}</b>` : ''}
+      </div>
+      <div class="steps">${bars}</div>
+      <div class="legend">${legend}</div>
+      <div class="byline">风控 ${d.analyst && d.analyst!=='无所有者' ? d.analyst : '未分配'}　·　业务 ${d.owner || '—'}${d.qyd && d.qyd!=='--' ? `　·　${d.qyd}` : ''}</div>
+      ${d.latest ? `<div class="next"><b>最新动态：</b>${d.latest}</div>` : ''}
+      ${d.conditions && d.conditions.length ? `
+        <div class="conds">
+          <details>
+            <summary>审批结论 / 风控要求（${d.conditions.length} 条）</summary>
+            <ul>${d.conditions.map(c=>`<li>${c}</li>`).join('')}</ul>
+          </details>
+        </div>` : ''}
+      <div class="foot">阶段：${d.stage}</div>
+      ${noteBtn('d'+idx, d.client)}
+      <div class="nb-slot"></div>
+    </div>`;
+}
+
+function renderBoard(){
+  const list = view==='work'
+    ? (cur==='all' ? ITEMS : ITEMS.filter(i=>i.status===cur))
+    : (acur==='all' ? DEALS : DEALS.filter(d=>d.group===acur));
+  if(!list.length){ BOARD.innerHTML = '<p style="color:#6b7280">这一类暂无事项。</p>'; return; }
+  BOARD.innerHTML = view==='work' ? list.map(workCard).join('') : list.map(dealCard).join('');
+}
+
+document.getElementById('meta').innerHTML =
+  `更新：${UPDATED}　·　审批进度同步自线上 CRM${FETCHED ? '（抓取 ' + FETCHED + '）' : ''}　·　整理：念安`;
+
+/* ===================== 记一笔 · 收件箱 ===================== */
+const REPO = 'qaz578622206/work-board';
+const INBOX_PREFIX = '【看板收件箱】';
+let inboxLoaded = false;
+
+function pad2(n){ return String(n).padStart(2,'0'); }
+function nowStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
+function escHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function saveLocal(name, text){
+  try{
+    const k = 'wb_notes';
+    const arr = JSON.parse(localStorage.getItem(k) || '[]');
+    arr.unshift({ name: name, text: text, at: nowStr() });
+    localStorage.setItem(k, JSON.stringify(arr.slice(0, 80)));
+  }catch(e){}
+}
+function flash(slot, msg){
+  const box = slot.querySelector('.note-box'); if(!box) return;
+  let f = box.querySelector('.flash');
+  if(!f){ f = document.createElement('div'); f.className = 'flash'; box.appendChild(f); }
+  f.textContent = msg;
+}
+function fallbackCopy(s, done){
+  try{
+    const ta = document.createElement('textarea');
+    ta.value = s; ta.style.position = 'fixed'; ta.style.top = '-1000px';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    done();
+  }catch(e){}
+}
+const NOTE_TIP =
+  '<div class="note-tip">' +
+  '「发送到收件箱」→ 打开提交页，点一下提交，内容就落到收件箱；我开机第一件事就是读它、并进看板。<br>' +
+  '不想登录 GitHub 就点「复制」，把这段话粘到聊天里发我，一样能同步。' +
+  '</div>';
+
+function openNote(btn){
+  const card = btn.closest('.card'); if(!card) return;
+  let slot = card.querySelector('.nb-slot');
+  if(!slot){ slot = document.createElement('div'); slot.className = 'nb-slot'; card.appendChild(slot); }
+  if (slot.innerHTML) { slot.innerHTML = ''; return; }   // 再点一次收起
+  const name = btn.dataset.name || '未命名';
+  slot.innerHTML =
+    '<div class="note-box">' +
+      '<textarea placeholder="随手记 —— 最新进展、想到的事、要我跟进的…"></textarea>' +
+      '<div class="note-acts">' +
+        '<button class="nb-primary" data-send="1">发送到收件箱</button>' +
+        '<button class="nb-ghost" data-copy="1">复制</button>' +
+        '<button class="nb-ghost" data-cancel="1">收起</button>' +
+      '</div>' + NOTE_TIP +
+    '</div>';
+  const ta = slot.querySelector('textarea');
+  slot.querySelector('[data-cancel]').onclick = () => { slot.innerHTML = ''; };
+  slot.querySelector('[data-send]').onclick = () => {
+    const t = (ta.value || '').trim();
+    if (!t) { flash(slot, '还没写内容呢'); return; }
+    saveLocal(name, t);
+    const title = INBOX_PREFIX + name;
+    const body = t + '\n\n---\n来自看板：' + name + '\n时间：' + nowStr();
+    const u = 'https://github.com/' + REPO + '/issues/new?title=' +
+              encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
+    window.open(u, '_blank');
+    flash(slot, '已打开提交页 —— 在那边点一下「Submit new issue」就进收件箱了');
+  };
+  slot.querySelector('[data-copy]').onclick = (ev) => {
+    const t = (ta.value || '').trim();
+    if (!t) { flash(slot, '还没写内容呢'); return; }
+    saveLocal(name, t);
+    const s = '【' + name + '】' + t;
+    const done = () => { ev.target.textContent = '已复制'; setTimeout(() => { ev.target.textContent = '复制'; }, 1600); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(s).then(done).catch(() => fallbackCopy(s, done));
+    } else { fallbackCopy(s, done); }
+  };
+  ta.focus();
+}
+document.addEventListener('click', (e) => {
+  const b = e.target && e.target.closest ? e.target.closest('.act') : null;
+  if (b) openNote(b);
+});
+
+function loadInbox(){
+  const list = document.getElementById('inboxList');
+  const stat = document.getElementById('inboxStat');
+  stat.textContent = '正在读取收件箱…';
+  list.innerHTML = '';
+  fetch('https://api.github.com/repos/' + REPO + '/issues?state=open&per_page=100')
+    .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(arr => {
+      const items = (arr || []).filter(i => !i.pull_request && String(i.title || '').indexOf(INBOX_PREFIX) === 0);
+      if (!items.length) {
+        stat.textContent = '收件箱是空的 —— 想到什么就在任意卡片上点「记一笔」。';
+        list.innerHTML =
+          '<div class="inbox-empty">' +
+          '· 在「在办事项」或「风控审批进度」里，点卡片右下角的「✍ 记一笔」；<br>' +
+          '· 写下最新情况，点「发送到收件箱」，在打开的页面点一下提交；<br>' +
+          '· 我下次开工第一件事就是读收件箱，把它并进看板与记录。</div>';
+        return;
+      }
+      stat.textContent = '收件箱有 ' + items.length + ' 条待同步。我开机后会读走并并进看板。';
+      list.innerHTML = items.map(it => {
+        const body = String(it.body || '').split('\n---\n')[0];
+        return '<div class="inbox-item">' +
+          '<div class="t">' + escHtml(String(it.title || '').replace(INBOX_PREFIX, '')) + '</div>' +
+          '<div class="b">' + escHtml(body) + '</div>' +
+          '<div class="m">#' + it.number + ' · ' + new Date(it.created_at).toLocaleString('zh-CN') + '</div>' +
+          '</div>';
+      }).join('');
+    })
+    .catch(() => {
+      stat.textContent = '收件箱读取失败（网络或超时）。';
+      list.innerHTML = '<div class="inbox-empty">可以直接用「复制」把内容发我，一样能同步。</div>';
+    });
+}
+
+renderStats(); renderFilters(); renderTabs(); renderBoard();
+
 /* ---- 口令锁（前端保护，用于挡住随手点开的人） ---- */
 const HASH = 'c2860769';
 function h(s){ let x = 5381; for (let i = 0; i < s.length; i++) { x = ((x << 5) + x + s.charCodeAt(i)) >>> 0; } return x.toString(16); }
