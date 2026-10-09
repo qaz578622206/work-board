@@ -91,6 +91,10 @@
   .note-tip{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.6}
   .flash{background:var(--greenbg);color:var(--green);border-radius:8px;padding:5px 10px;font-size:12.5px;margin-top:8px}
   .nb-slot:empty{display:none}
+  .group-tag{align-self:flex-start;font-size:11.5px;font-weight:600;color:#7c3aed;
+    background:#f3e8ff;border-radius:20px;padding:2px 10px}
+  .note-manual{background:#fff8e6;border-left:3px solid #f0b429;padding:8px 10px;
+    border-radius:6px;font-size:13.5px;line-height:1.6}
   #inboxWrap{padding:20px 28px 40px;max-width:900px}
   .inbox-item{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;margin-bottom:10px}
   .inbox-item .t{font-size:14.5px;font-weight:600}
@@ -247,6 +251,36 @@ const ITEMS = [
     gaps: ["本期尚未更新"],
     next: "开工先读一眼汇率与同行动态",
     updated: "09-22"
+  },
+  {
+    name: "朋乐 / Bestsun 集团（重新激活）",
+    subject: "朋乐香港（两笔）· Bestsun Business —— 同一家，相互担保",
+    status: "yellow", label: "合同视频担保中",
+    amount: "集团额度两笔各 <b>USD 1,000 万</b>",
+    summary: "重新激活的客户：现阶段在走合同视频担保，等客户确认时间。三笔（朋乐已放款 / 朋乐审批中 / Bestsun）是同一家，已整理在一起。",
+    gaps: ["客户还没给出视频担保的时间", "朋乐那笔「风控审批中」的结论要盯落地"],
+    next: "催客户定视频担保时间；三笔按同一集团一起跟",
+    updated: "10-09"
+  },
+  {
+    name: "万豪智联（Zhi King 集团）",
+    subject: "Wanhao Smart IOT · 与至秦電子同属 Zhi King，共同承担 1000 万额度",
+    status: "yellow", label: "合同已签 · 待客户支用",
+    amount: "集团额度 <b>USD 1,000 万</b>（利率 TBC）",
+    summary: "合同已经签了，只差客户支用；拖得比较久，到时要提前和风控再确认。（线上阶段还挂在「待客户确认」，没跟上）",
+    gaps: ["客户一直没支用、时间拖久了", "支用前得先和风控对一次"],
+    next: "提前跟风控确认再走支用；盯客户什么时候用款",
+    updated: "10-09"
+  },
+  {
+    name: "BestMem（飞达集团）",
+    subject: "BestMem Technology · FEDA / 飞达乐享（深圳）",
+    status: "green", label: "已生效 · 客户在用",
+    amount: "额度 <b>USD 500 万</b>（FEDA 集团）",
+    summary: "已生效，客户已经在用了。8 条审批条件（Synnex 直发、库存冻结确认、交叉担保等）在执行侧。（线上阶段还挂着「待客户接受」）",
+    gaps: ["审批条件里的库存监管与 SKU 报备要跟进"],
+    next: "按 8 条条件跟执行；有空把线上阶段往前推一推",
+    updated: "10-09"
   }
 ];
 
@@ -262,6 +296,7 @@ const DEALS = [
     analyst: 'Tseng Charlie', owner: 'Roc zhang', qyd: '--',
     latest: 'Chung Ross · 2024年7月31日 · @Charlie Tseng Please see below two entities for 分身 for 朋樂 Jeocu HK Trade Limited https://app.hubspot.com/contacts/3907577/record/0-2/21623030788 HK Hotcol Trade Limited https://app.hubspot.com/contacts/3907577/rec',
     conditions: ['Corporate guarantee to be executed by 杭州环彩电子商务有限公司', 'Cross guarantee to be executed between Pleapy Hongkong Co., Limited and Bestsun Business Limited', 'Personal guarantee to be executed by 李雪飛, 沈欣瑞 and 华黎佳', 'Consent for credit checking to be signed by 杭州环彩电子商务有限公司, 李雪飛, 沈欣瑞 and 华黎佳 (subject to no adverse finding)', 'Debt acknowledgement by 李雪飛, 沈欣瑞 and 华黎佳', 'eKYC on Tmall and TFX to confirm the bank account has been changed to AirWallex', 'EKYC on office', 'Fund flow enhancement to be executed by AirWallex', 'Inventory enhancement to be executed by 錦城 and ANE'],
+    note: '', groupKey: 'plb', groupName: '朋乐 · Bestsun（同一家）',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/18085754552'
   },
   {
@@ -274,19 +309,8 @@ const DEALS = [
     analyst: 'Tseng Charlie', owner: 'Roc zhang', qyd: '--',
     latest: 'Roc zhang · 2026年9月7日 · @Keith Tsang 王立个人征信报告 租房合同已同步',
     conditions: ['Corporate guarantee to be executed by 杭州环彩电子商务有限公司', 'Cross guarantee to be executed between Pleapy Hongkong Co., Limited and Bestsun Business Limited', 'Personal guarantee to be executed by 李雪飛, 沈欣瑞 and 华黎佳', 'Consent for credit checking to be signed by 杭州环彩电子商务有限公司, 李雪飛, 沈欣瑞 and 华黎佳 (subject to no adverse finding)', 'Debt acknowledgement by 李雪飛, 沈欣瑞 and 华黎佳', 'eKYC on Tmall and TFX to confirm the bank account has been changed to AirWallex', 'EKYC on office', 'Fund flow enhancement to be executed by AirWallex', 'Inventory enhancement to be executed by 錦城 and ANE'],
+    note: '重新激活的客户，现阶段在走合同视频担保，需客户确认时间。', groupKey: 'plb', groupName: '朋乐 · Bestsun（同一家）',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/17538994432'
-  },
-  {
-    client: 'BestMem（飞达集团）',
-    subject: 'BestMem Technology Limited',
-    stage: 'Credit Decision made pending for offer acceptance',
-    stageLabel: '待客户接受',
-    tone: 'blue', step: 5, group: 'live', dead: false,
-    amount: 'US$5,000,000', reqLimit: 'US$5,000,000', reqRate: '', rating: '--',
-    analyst: 'Mak Jason', owner: 'Roc zhang', qyd: 'SA106755',
-    latest: 'Roc zhang · 2026年8月27日 · @Yin Huang @Vivien Yeung 飞达新香港公司主体，飞书已发起合同申请，SA编码SA106755',
-    conditions: ['Corporate guarantee by飞达乐享（深圳）科技开发有限公司 and Prosper Wave Limited.', 'Personal guarantee by 彭漢超.', 'Allowed SKU for inventory pledge in Qupital is subject to recommendation of industry expert, seller is required to submit full SKU code to Qupital prior to facility drawdown for industry expert valuation.', 'Additional HK borrowing entity to be provided due to concentration (credit limit >USD5m).', 'Synnex must deliver the goods directly to the designated warehouse;', 'Synnex must copy Qupital "feda.notification@qupital.com" directly on all key transaction emails', 'The designated warehouse (i.e. SF express warehouse) must directly confirm receipt, stock counting and the freezing of the inventory.', 'Cross CG between Cross CG between FEDA ELECTRONICS COMPANY LIMITED and BestMem Technology Limited.'],
-    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344318342880'
   },
   {
     client: '朋乐香港（Pleapy）',
@@ -298,7 +322,21 @@ const DEALS = [
     analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
     latest: 'Tang Zen · 2026年9月28日 · @Keith Tsang @zhang Roc @Vivien Yeung @chan pui ki peggy @Sherry Yang @tu betty @Ashley Lai @Alvin Tse @Kasey Cheung @Kat Kwok full set docusign done, doc checked and uploaded',
     conditions: ['Personal Guarantee to be executed by李雪飞, 华黎佳 and 王立', 'Corporate Guarantee to be executed by杭州环彩电子商务有限公司', 'Debt acknowledgement to be provided by 李雪飞, 华黎佳 and 王立', 'Credit checking to be conducted on 李雪飞, 华黎佳 and 王立', 'Updated PBOC report from 杭州环彩电子商务有限公司 to be provided', 'Inventory control to be executed by Jincheng, ANE and Cainiao'],
+    note: '', groupKey: 'plb', groupName: '朋乐 · Bestsun（同一家）',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/340265798345'
+  },
+  {
+    client: 'BestMem（飞达集团）',
+    subject: 'BestMem Technology Limited',
+    stage: 'Credit Decision made pending for offer acceptance',
+    stageLabel: '待客户接受',
+    tone: 'blue', step: 5, group: 'live', dead: false,
+    amount: 'US$5,000,000', reqLimit: 'US$5,000,000', reqRate: '', rating: '--',
+    analyst: 'Mak Jason', owner: 'Roc zhang', qyd: 'SA106755',
+    latest: 'Roc zhang · 2026年8月27日 · @Yin Huang @Vivien Yeung 飞达新香港公司主体，飞书已发起合同申请，SA编码SA106755',
+    conditions: ['Corporate guarantee by飞达乐享（深圳）科技开发有限公司 and Prosper Wave Limited.', 'Personal guarantee by 彭漢超.', 'Allowed SKU for inventory pledge in Qupital is subject to recommendation of industry expert, seller is required to submit full SKU code to Qupital prior to facility drawdown for industry expert valuation.', 'Additional HK borrowing entity to be provided due to concentration (credit limit >USD5m).', 'Synnex must deliver the goods directly to the designated warehouse;', 'Synnex must copy Qupital "feda.notification@qupital.com" directly on all key transaction emails', 'The designated warehouse (i.e. SF express warehouse) must directly confirm receipt, stock counting and the freezing of the inventory.', 'Cross CG between Cross CG between FEDA ELECTRONICS COMPANY LIMITED and BestMem Technology Limited.'],
+    note: '已生效，客户已在使用了 —— 线上阶段还没跟上。', groupKey: '', groupName: '',
+    url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344318342880'
   },
   {
     client: '万豪智联（Zhi King 集团）',
@@ -310,6 +348,7 @@ const DEALS = [
     analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
     latest: 'Roc zhang · 2026年1月28日 · @Keith Tsang @Ross Chung @Vivien Yeung SA：106574 客户zhiking另外一家香港公司资料，董事法人和zhiking HK完同一人，和zhiking共同承担1000万美金的额度。 合同准备文件已进行两家香港公司一家大陆公司相互担保相关资料填写和提交。',
     conditions: ['Personal Guarantee to be executed by 李罡 and 鍾格雲', 'Corporate Guarantee to be executed by深圳市万豪智联技术有限公司', 'Debt acknowledgement to be provided by 李罡 and 鍾格雲', 'Credit checking to be conducted on李罡 and 鍾格雲', 'Loan drawdown shall be directly paid to suppliers instead of Seller', 'Inventory control to be executed by SHEN MING GLOBAL CO LIMITED', 'Cross Guarantee to be executed by all Sellers >1 year transaction sample documents from mentioned suppliers to be provided before drawdown', 'Only direct purchase from SK Hynix is in whitelist at this moment'],
+    note: '合同已签，只差客户支用；拖得比较久了，到时需提前和风控再确认。', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/276106757856'
   },
   {
@@ -322,6 +361,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106767',
     latest: 'Tseng Charlie · 2026年9月4日 · @zhang Roc @min zhang Hi Roc, 請提供授信調查報告 Regards, Charlie Tseng',
     conditions: ['授信調查報告'],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/345478902511'
   },
   {
@@ -334,6 +374,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106764',
     latest: 'Tseng Charlie · 2026年9月4日 · @zhang Roc 請提供調查報告 Regards, Charlie Tseng',
     conditions: ['調查報告'],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344730712781'
   },
   {
@@ -346,6 +387,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
     latest: 'Tseng Charlie · 2026年8月31日 · @zhang Roc 這客戶的上游是一些香港公司, 與現時我們放款的客戶不同, 不是由生產商或大型供應商供貨. 請先提供證明這些上游的實力 Regards, Charlie Tseng',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/344366226130'
   },
   {
@@ -358,6 +400,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: 'SA106774',
     latest: 'Roc zhang · 2026年10月9日 · @Charlie Tseng @Yin Huang @min zhang @Vivien Yeung SASA106774，客户现有基础资料已备，其中涉及交易链资料中合同处，客户公司盖章上方从新名字不一致，客户咨询供应商模板合同修改没到位，正在处理中，完成后提供，麻烦先分配风控同事进行审批流程。 额度申请：1000万美金 文件上传好像超上限，到时如需要风控可单独找我同步资料',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/348941385430'
   },
   {
@@ -370,6 +413,7 @@ const DEALS = [
     analyst: 'Chan Sandy', owner: 'Roc zhang', qyd: '--',
     latest: 'betty tu · 2026年9月7日 · @Sandy Chan @chan pui ki peggy @Sherry Yang @Vivien Yeung Hi Sandy， 请查收场地视频。',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/340489280191'
   },
   {
@@ -382,6 +426,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
     latest: 'Yeung Vivien · 2026年4月20日 · 銷售說业务是在俄罗斯 暂时 搞不了',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/320623881947'
   },
   {
@@ -394,6 +439,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
     latest: '',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/41703655567'
   },
   {
@@ -406,6 +452,7 @@ const DEALS = [
     analyst: '无所有者', owner: 'Roc zhang', qyd: '--',
     latest: '',
     conditions: [],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/36393367716'
   },
   {
@@ -418,11 +465,12 @@ const DEALS = [
     analyst: 'Tsang Keith', owner: 'Roc zhang', qyd: '--',
     latest: 'Ho Vivian · 2026年3月20日 · Declined due to lack of sufficient supporting documents. 十二月 2025',
     conditions: ['Declined due to lack of sufficient supporting documents.'],
+    note: '', groupKey: '', groupName: '',
     url: 'https://app-na2.hubspot.com/contacts/3907577/record/0-3/30401730161'
   }
 ];
 const UPDATED = '2026-10-09';
-const FETCHED = '2026-10-09 13:09';
+const FETCHED = '2026-10-09 13:37';
 
 const STAGES = ['线索','意向','待客户确认','风控审批中','信贷决策','合同准备','额度生效'];
 
@@ -549,6 +597,7 @@ function dealCard(d, idx){
     `<span class="${!d.dead && k+1===step?'now':''}">${s}</span>`).join('');
   return `
     <div class="card">
+      ${d.groupName ? `<div class="group-tag">⛓ ${d.groupName}</div>` : ''}
       <div class="card-top">
         <div>
           <div class="name">${d.client}</div>
@@ -566,6 +615,7 @@ function dealCard(d, idx){
       <div class="legend">${legend}</div>
       <div class="byline">风控 ${d.analyst && d.analyst!=='无所有者' ? d.analyst : '未分配'}　·　业务 ${d.owner || '—'}${d.qyd && d.qyd!=='--' ? `　·　${d.qyd}` : ''}</div>
       ${d.latest ? `<div class="next"><b>最新动态：</b>${d.latest}</div>` : ''}
+      ${d.note ? `<div class="note-manual"><b>你记的：</b>${d.note}</div>` : ''}
       ${d.conditions && d.conditions.length ? `
         <div class="conds">
           <details>
