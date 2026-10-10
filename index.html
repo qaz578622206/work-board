@@ -83,6 +83,275 @@
 <script>
 const ITEMS = [
   {
+    name: "茅台（Hengyu / THE HQ）",
+    subject: "HENGYU GLOBAL SUPPLY CHAIN LIMITED · THE HQ Co., Ltd（韩国济州）",
+    status: "green", label: "已批 · 客户未用款",
+    amount: "额度 <b>USD 500 万</b>　·　折扣率 <b>40%</b>　·　年化 <b>14% ／ 15.5%</b>　·　已支用 <b>USD 0</b>",
+    summary: "授信已批（C1）：Platform Inventory、Max 90 天、Bullet、库存监管 JinCheng、到期 2027-03-05。六个审批条件全部完成，合同与仓库也已落地 —— 客户目前未用款。",
+    gaps: ["客户尚未提款（500 万额度未动用）", "按 LTV 40%：跑满 500 万需 1,250 万货值备货", "合同准备表「额度」仍写 10,000,000，需改成 500 万"],
+    next: "推客户用款：定首批备货量与提货节奏；JinCheng 控货流程已通",
+    updated: "10-10"
+  },
+  {
+    name: "嘉和（2026 年审）",
+    subject: "香港嘉和國際貿易 / 聚合時代貿易 / 龍盛貿易（三主体）",
+    status: "green", label: "可提交",
+    amount: "年审报送 · 无需新额度",
+    summary: "风控五条已逐条落地，提交包已按编号整理好（00_提交风控-整理版，37 个文件）。风控四条追问的答复稿已备；已向风控催年审排期，房租合同到期时间也已通知客户。",
+    gaps: ["「聚合」在三家店铺截图里没有对应", "韩国办公室租约 2026-11-30 到期 —— 已通知客户，等续签版", "拼多多两店的入驻时间／最早订单待客户给", "库存主体栏客户未填（我方补充说明）", "일루밍 与三家香港公司的关系证明待客户给"],
+    next: "跟进风控年审排期；发出四条追问的答复（桌面已备稿）；收到续签租约与拼多多开店截图后补进提交包",
+    updated: "10-10"
+  },
+  {
+    name: "力拓國際（LEECOM）",
+    subject: "香港力拓國際有限公司 · 唯一董事陈嘉珮",
+    status: "yellow", label: "已送审 · 等风控分配",
+    amount: "拟报额度 <b>USD 500 万</b>（规模撑得住、材料撑不住）",
+    summary: "第一批常规资料已送审，等风控分配审阅；同时补件。资料已按 8 个编号目录归位；采购链路四家全部「采购+付款齐全」。",
+    gaps: ["净利率 4.85%／4.10%，两年均低于 5% 门槛（硬指标）", "只有采购侧、没有下游销售与回款材料", "银行流水无交易对手、收款侧无法证明", "供应商采购合同主体名称不一致 —— 等客户补修正版", "三份 PO 落款主体名笔误 —— 客户已承诺重新出具", "李桂海 → 陈嘉珮 的股权／董事变更文件未补"],
+    next: "等风控分配；等客户补供应商采购合同（名称不一致问题）与重出的三份 PO；额度建议分阶段报",
+    updated: "10-10"
+  },
+  {
+    name: "启源",
+    subject: "香港啟源電子科技 / 深圳市宏开机电（两家名字不同）",
+    status: "blue", label: "已送审 · 补件中",
+    amount: "电子元器件 · 存储贸易",
+    summary: "第一批常规资料已送审。采购订单 8 份 + 销售订单 11 份（上下游都有）。上游穿透①已到：佰维授权经销商＝深圳市芯丰源科技（与香港愛特同一实控人万广松）。客户供应商这块的新资料正在补充给风控。",
+    gaps: ["香港主体的财务报表没有（6 号里全是国内主体的月报）", "8 号目录（董事法人征信与身份证）是空的", "上游穿透① 的交易四件套一件没有", "上游穿透②（佰维 ← 三星／海力士）全部待补", "佰维授权书 2026-11-01 到期 —— 需续期版"],
+    next: "等客户补齐上游穿透 ①②，连同香港主体财报与 8 号资料一并补交风控",
+    updated: "10-10"
+  },
+  {
+    name: "W Network（新加坡）",
+    subject: "W Network Private（新加坡主体）",
+    status: "yellow", label: "已送风控 · 补 2026 财报",
+    amount: "现额度 180 万 → 目标 <b>200 万</b>",
+    summary: "风控已介入并追加问题：① 平台打款名已确认 —— GPAY NETWORK(S)→Shopify、PIPO(SG)→TikTok、ShopeePay→Shopee、STRIPE→Shopify、WORLDFIRST(SINGAPORE) MERCH→Lazada；② 质疑 TikTok 子账号月销仅几万到十几万 → 客户答复「新加坡体量不大，属正常」；③ 2026 年财报尚未补；④ Shopee API 对接已断开（授权到期）。正在让客户补 2026 内账。",
+    gaps: ["2026 年内账／财报未补（风控已点名）", "损益表费用明细（哪些是投入性支出）", "负债明细（银行贷款／应付账款／关联方）", "银行余额的用途与受限情况", "4 笔银行贷款却看不到利息费用；负债里没有租赁负债科目"],
+    next: "等客户补 2026 内账／财报；Shopee API 授权续期；提额前先把「亏损与高负债」的说法想好 —— 解释改不了分数",
+    updated: "10-10"
+  },
+  {
+    name: "曼哈万诚 · 京东项目",
+    subject: "CostLow INC. → 曼哈 → 京东（费列罗线）",
+    status: "green", label: "首笔已放款 · 第二单启动",
+    amount: "首笔实付 <b>USD 137,576</b>（单价八成 148,167 抵扣 13,251）· 第二单已产生需求",
+    summary: "第一笔放款完成，Qupital-Vivien 已放款并出水单（改了银行）。收款方 CostLow INC.（Chase Bank）。⭐ 第二单订单需求已产生：付款 10/12（周一），提货 10/15、10/16 航班飞上海；PO 下来后截图＋邮件合同确认，后台可查，已与风控同步。",
+    gaps: ["第二单 PO 与合同确认待落地", "Shaolong Yu 与 Sam Wholesale 两处待澄清"],
+    next: "跟进第二单：10/12 付款、10/15–10/16 提货飞上海；资料在 客户资料\\费列罗\\京东项目",
+    updated: "10-10"
+  },
+  {
+    name: "大朱新项目",
+    subject: "对外合作项目 · 集团发币（USDT 兑付）模式",
+    status: "blue", label: "定结构中",
+    amount: "权益／条款／公司名 待确认",
+    summary: "对外项目在定结构中，与大朱对齐三方（我的利益、条款、公司名）。⚠️ 商业模型为集团发币收客户货、再以 USDT 1:1 兑付 —— 六个风险位已梳理。",
+    gaps: ["法律意见书、备付与托管、牌照 —— 三份文件未到", "三条红线要早落纸"],
+    next: "建议 10/8 只沟通不签、签字挪到 10/14（辛酉）；本命月只陪伴不推事（老大哥线）",
+    updated: "10-08"
+  },
+  {
+    name: "香港仓源",
+    subject: "明哥公司现成香港仓 / 自建 / 第三方",
+    status: "blue", label: "进行中",
+    amount: "三案费用与时间对比已做",
+    summary: "仓源线：明哥公司的现成仓（与朋乐合用、老板拟退租）vs 自建 vs 第三方。三个硬问题：主体／李雪飞身份、共用与退租、明哥想当主导。",
+    gaps: ["主体与身份待澄清", "共用与退租安排未定"],
+    next: "按已备的三案对比推进周一谈判策略",
+    updated: "09-24"
+  },
+  {
+    name: "提成核对",
+    subject: "Rock / 张永鹏 · 介绍人 0.5% 规则",
+    status: "yellow", label: "挂账待核",
+    amount: "坏账三家未发 <b>USD 3,330.24</b>；本次少发 5,156～9,133 元",
+    summary: "Q2 剩下 50% 的口径＝年底完成业务目标才发（不是被扣）。已发的两笔合规没少发。",
+    gaps: ["7—9 月明细未钉死，少发金额待确认"],
+    next: "等 7—9 月明细，核清少发部分；盯年底业务目标节点",
+    updated: "09-30"
+  },
+  {
+    name: "泰坦抖音",
+    subject: "泰坦铸造国际 等（多主体）",
+    status: "red", label: "已被拒绝",
+    amount: "—",
+    summary: "风控已拒绝，不再讨论。判据：回款不连续、波动大、难以监控。",
+    gaps: ["—"],
+    next: "结案，不再投入",
+    updated: "09-24"
+  },
+  {
+    name: "行情与行业情报",
+    subject: "汇率 / 公司 / 行业监控（值班台）",
+    status: "blue", label: "常设",
+    amount: "—",
+    summary: "最新一期 2026-09-22：汇率与远期贴水、存储 Q3 涨 20~30%、韩妆渠道变化、Qupital 3 亿美元 C 轮、丰泊 × 京东。",
+    gaps: ["本期尚未更新"],
+    next: "开工先读一眼汇率与同行动态",
+    updated: "09-22"
+  }
+];
+
+const BOARD = document.getElementById('board');
+const STATS = document.getElementById('stats');
+const FILTERS = document.getElementById('filters');
+const FILTER_DEFS = [
+  {key:'all',    text:'全部'},
+  {key:'yellow', text:'等客户补件'},
+  {key:'green',  text:'可提交 / 已放款'},
+  {key:'blue',   text:'进行中'},
+  {key:'red',    text:'已结案'}
+];
+let cur = 'all';
+
+function counts(){
+  return {
+    total: ITEMS.length,
+    waiting: ITEMS.filter(i=>i.status==='yellow').length,
+    done: ITEMS.filter(i=>i.status==='green').length,
+    ongoing: ITEMS.filter(i=>i.status==='blue').length
+  };
+}
+function renderStats(){
+  const c = counts();
+  STATS.innerHTML = `
+    <div class="stat"><b>${c.total}</b><span>在办事项</span></div>
+    <div class="stat"><b>${c.waiting}</b><span>等客户补件</span></div>
+    <div class="stat"><b>${c.done}</b><span>可提交 / 已放款</span></div>
+    <div class="stat"><b>${c.ongoing}</b><span>推进中</span></div>`;
+}
+function renderFilters(){
+  FILTERS.innerHTML = FILTER_DEFS.map(f=>
+    `<button data-k="${f.key}" class="${f.key===cur?'on':''}">${f.text}</button>`).join('');
+  FILTERS.querySelectorAll('button').forEach(b=>b.onclick=()=>{cur=b.dataset.k;renderFilters();renderBoard();});
+}
+function renderBoard(){
+  const list = cur==='all' ? ITEMS : ITEMS.filter(i=>i.status===cur);
+  if(!list.length){ BOARD.innerHTML = '<p style="color:#6b7280">这一类暂无事项。</p>'; return; }
+  BOARD.innerHTML = list.map(i=>`
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <div class="name">${i.name}</div>
+          <div class="subject">${i.subject}</div>
+        </div>
+        <div class="badge b-${i.status}">${i.label}</div>
+      </div>
+      ${i.amount && i.amount!=='—' ? `<div class="amt">${i.amount}</div>` : ''}
+      <div class="summary">${i.summary}</div>
+      ${i.gaps && i.gaps.filter(g=>g!=='—').length ? `
+        <div>
+          <div class="sec-title">缺口 / 待补</div>
+          <ul>${i.gaps.filter(g=>g!=='—').map(g=>`<li>${g}</li>`).join('')}</ul>
+        </div>` : ''}
+      ${i.next && i.next!=='—' ? `<div class="next"><b>下一步：</b>${i.next}</div>` : ''}
+      <div class="foot">最后更新：${i.updated}</div>
+    </div>`).join('');
+}
+renderStats(); renderFilters(); renderBoard();
+/* ---- 口令锁（前端保护，用于挡住随手点开的人） ---- */
+const HASH = 'c2860769';
+function h(s){ let x = 5381; for (let i = 0; i < s.length; i++) { x = ((x << 5) + x + s.charCodeAt(i)) >>> 0; } return x.toString(16); }
+const lockEl = document.getElementById('lock');
+function unlock(){ if (lockEl) lockEl.style.display = 'none'; }
+if (sessionStorage.getItem('wb_ok') === HASH) { unlock(); }
+const pwEl = document.getElementById('lockpw');
+const btnEl = document.getElementById('lockbtn');
+if (btnEl) btnEl.onclick = () => {
+  if (h(pwEl.value) === HASH) { sessionStorage.setItem('wb_ok', HASH); unlock(); }
+  else { document.getElementById('lockerr').textContent = '口令不对'; }
+};
+if (pwEl) pwEl.addEventListener('keydown', e => { if (e.key === 'Enter' && btnEl) btnEl.click(); });
+</script>
+</body>
+</html>
+!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>金融工作 · 进度看板</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --line:#e6e8ec; --text:#1f2430; --sub:#6b7280;
+    --green:#16a34a; --greenbg:#e9f7ef;
+    --yellow:#b45309; --yellowbg:#fdf3e3;
+    --blue:#2563eb; --bluebg:#e9f0fe;
+    --red:#dc2626; --redbg:#fdeaea;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  header{background:#fff;border-bottom:1px solid var(--line);padding:22px 28px 16px}
+  h1{margin:0 0 4px;font-size:22px;letter-spacing:.5px}
+  .meta{color:var(--sub);font-size:13px}
+  .stats{display:flex;gap:26px;margin:16px 0 4px;flex-wrap:wrap}
+  .stat b{display:block;font-size:24px;line-height:1.2}
+  .stat span{color:var(--sub);font-size:12.5px}
+  .filters{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .filters button{border:1px solid var(--line);background:#fff;color:var(--text);
+    padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13.5px}
+  .filters button:hover{border-color:#c9ced8}
+  .filters button.on{background:var(--text);color:#fff;border-color:var(--text)}
+  main{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));
+    gap:16px;padding:20px 28px 40px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .name{font-size:16.5px;font-weight:600}
+  .subject{color:var(--sub);font-size:12.5px;margin-top:2px;word-break:break-all}
+  .badge{font-size:12px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600}
+  .b-green{color:var(--green);background:var(--greenbg)}
+  .b-yellow{color:var(--yellow);background:var(--yellowbg)}
+  .b-blue{color:var(--blue);background:var(--bluebg)}
+  .b-red{color:var(--red);background:var(--redbg)}
+  .summary{font-size:14px}
+  .amt{font-size:13px;color:var(--sub)}
+  .amt b{color:var(--text);font-size:14.5px}
+  .sec-title{font-size:12.5px;color:var(--sub);margin-bottom:2px;font-weight:600}
+  ul{margin:0;padding-left:18px}
+  li{font-size:13.5px;margin:2px 0}
+  .next{background:#f8f9fb;border-left:3px solid #cbd5e1;padding:8px 10px;border-radius:6px;font-size:13.5px}
+  .foot{color:var(--sub);font-size:12px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
+  footer{padding:0 28px 40px;color:var(--sub);font-size:12.5px}
+  @media(max-width:560px){main{padding:16px 14px 30px}header{padding:18px 14px 14px}}
+  #lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#eef1f6,#e2e8f1);
+    display:flex;align-items:center;justify-content:center;padding:20px}
+  #lock .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px;
+    width:100%;max-width:340px;text-align:center;box-shadow:0 12px 40px rgba(20,30,50,.10)}
+  #lock h2{margin:0 0 6px;font-size:19px;font-weight:600}
+  #lock p{margin:0 0 18px;color:var(--sub);font-size:13px}
+  #lock input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
+    font-size:15px;text-align:center;letter-spacing:2px;outline:none}
+  #lock input:focus{border-color:#9aa6b8}
+  #lock button{margin-top:12px;width:100%;padding:11px;border:0;border-radius:9px;
+    background:var(--text);color:#fff;font-size:15px;cursor:pointer}
+  #lock button:hover{opacity:.9}
+  #lock .err{color:var(--red);font-size:13px;min-height:18px;margin-top:8px}</style>
+</head>
+<body>
+<div id="lock">
+  <div class="box">
+    <h2>金融工作 · 进度看板</h2>
+    <p>请输入口令</p>
+    <input id="lockpw" type="password" placeholder="口令" autocomplete="off">
+    <button id="lockbtn">进入</button>
+    <div class="err" id="lockerr"></div>
+  </div>
+</div>
+<header>
+  <h1>金融工作 · 进度看板</h1>
+  <div class="meta">更新：2026-10-10　·　整理：念安</div>
+  <div class="stats" id="stats"></div>
+  <div class="filters" id="filters"></div>
+</header>
+<main id="board"></main>
+<footer>本页仅供个人工作跟进使用，内容随时更新。</footer>
+<script>
+const ITEMS = [
+  {
     name: "嘉和（2026 年审）",
     subject: "香港嘉和國際貿易 / 聚合時代貿易 / 龍盛貿易（三主体）",
     status: "green", label: "可提交",
